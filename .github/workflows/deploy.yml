@@ -5,11 +5,14 @@ on:
 
 name: AzureLoginSample
 
+
+
 jobs:
 
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@main
     
     - uses: azure/login@v1
       with:
