@@ -18,6 +18,6 @@ jobs:
     - uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ secrets.SUBSCRIPTIONID}}
-        resourceGroupName: ${{ variables.RG}}
+        resourceGroupName: ${{ vars.RG}}
         template: ARM-Templates/container-webapp-template.json
 
