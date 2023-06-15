@@ -5,7 +5,9 @@ on:
 
 name: AzureLoginSample
 
-
+env:
+   TargetEnvironment: test
+   
 
 jobs:
 
@@ -23,4 +25,5 @@ jobs:
         subscriptionId: ${{ secrets.SUBSCRIPTIONID}}
         resourceGroupName: ${{ vars.RG}}
         template: ./ARM-Templates/container-webapp-template.json
+        parameters: webAppName=hjklt-devops-${{env.TargetEnvironment}}
 
