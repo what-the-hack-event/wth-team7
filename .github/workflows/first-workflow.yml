@@ -14,4 +14,17 @@ jobs:
 
       - name: step2
         run: echo "step2"
+
+  job2:
+    name: second job
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Ship it
+      uses: mscoutermarsh/cowsays-action@master
+      with:
+        text: 'ship ship ship!'
+        color: 'red'
+
+
  
