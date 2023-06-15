@@ -15,5 +15,9 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     
-    - run: |
-        az webapp list --query "[?state=='Running']"
+    - uses: azure/arm-deploy@v1
+      with:
+        subscriptionId: ${{ secrets.SUBSCRIPTIONID}}
+        resourceGroupName: ${{ variables.RG}}
+        template: ARM-Templates/container-webapp-template.json
+
