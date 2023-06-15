@@ -23,7 +23,7 @@
             "type": "String"
         },
         "registryName": {
-            "defaultValue": "hjklt-devopsreg",
+            "defaultValue": "hjkltdevopsreg",
             "type": "String"
         },
         "imageName": {
