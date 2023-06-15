@@ -6,13 +6,7 @@ on:
 name: AzureLoginSample
 
 env:
-   TargetEnvironment: prod
-   registryName: hjkltdevopsreg
-   repositoryName: wth-team7/dotnetcoreapp
-   dockerFolderPath: Application/src/RazorPagesTestSample
-   tag: ${{github.run_number}}
-   
-   
+   TargetEnvironment: prod  
 
 jobs:
 
@@ -32,16 +26,3 @@ jobs:
         template: ./ARM-Templates/container-webapp-template.json
         parameters: webAppName=hjklt-devops-${{env.TargetEnvironment}}
         
-  docker:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Docker Login
-      run: docker login ${{env.registryName}} -u ${{ secrets.ACR_USERNAME}} -p ${{ secrets.ACR_PASSWORD}}
-      
-    - name: Docker Build
-      run: docker build -t ${{env.registryName}}/${{env.registryName}}:${{env.tag}} --build-arg build_version=${{env.tag}} ${{env.dockerFolderPath}}
-      
-    - name: Docker Push
-      run: docker push ${{env.registryName}}/${{env.registryName}}:${{env.tag}}
