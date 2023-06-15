@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Ship it
-      uses: mscoutermarsh/cowsays-action@master
-      with:
-        text: 'ship ship ship!'
-        color: 'red'
+      - name: Ship it
+        uses: mscoutermarsh/cowsays-action@master
+        with:
+            text: 'ship ship ship!'
+            color: 'red'
 
 
  
