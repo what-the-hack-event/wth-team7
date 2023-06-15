@@ -5,7 +5,7 @@ name: .NET
 
 env:
    TargetEnvironment: prod
-   registryName: hjkltdevopsreg
+   registryName: hjkltdevopsreg.azurecr.io
    repositoryName: wth-team7/dotnetcoreapp
    dockerFolderPath: Application/src/RazorPagesTestSample
    tag: ${{github.run_number}}
