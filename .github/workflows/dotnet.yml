@@ -3,6 +3,13 @@
 
 name: .NET
 
+env:
+   TargetEnvironment: prod
+   registryName: hjkltdevopsreg
+   repositoryName: wth-team7/dotnetcoreapp
+   dockerFolderPath: Application/src/RazorPagesTestSample
+   tag: ${{github.run_number}}
+
 on:
   push:
     paths: [ "Application/**" ]
@@ -11,7 +18,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -26,3 +32,17 @@ jobs:
       run: dotnet build --no-restore ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal ./Application/tests/RazorPagesTestSample.Tests/RazorPagesTestSample.Tests.csproj
+      
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Docker Login
+      run: docker login ${{env.registryName}} -u ${{ secrets.ACR_USERNAME}} -p ${{ secrets.ACR_PASSWORD}}
+      
+    - name: Docker Build
+      run: docker build -t ${{env.registryName}}/${{env.registryName}}:${{env.tag}} --build-arg build_version=${{env.tag}} ${{env.dockerFolderPath}}
+      
+    - name: Docker Push
+      run: docker push ${{env.registryName}}/${{env.registryName}}:${{env.tag}}
