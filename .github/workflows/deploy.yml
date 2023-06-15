@@ -6,7 +6,7 @@ on:
 name: AzureLoginSample
 
 env:
-   TargetEnvironment: test
+   TargetEnvironment: prod
    
 
 jobs:
