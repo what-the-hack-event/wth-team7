@@ -7,6 +7,11 @@ name: AzureLoginSample
 
 env:
    TargetEnvironment: prod
+   registryName: hjkltdevopsreg
+   repositoryName: wth-team7/dotnetcoreapp
+   dockerFolderPath: Application/src/RazorPagesTestSample
+   tag: ${{github.run_number}}
+   
    
 
 jobs:
