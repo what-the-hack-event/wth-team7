@@ -86,8 +86,13 @@ jobs:
       
       - name: BUILD AND PUSH DOCKER IMAGE
         run: |
-          docker build -t ${{ vars.registryName }}/${{ vars.repositoryName }}:${{ vars.tag }} --build-arg build_version=${{ vars.tag }} ${{ vars.dockerFolderPath }}
-          docker push ${{ vars.registryName }}/${{ vars.repositoryName }}:${{ vars.tag }}
+          docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
+          docker push $registryName/$repositoryName:$tag
+        env:
+          registryName: ${{ secrets.ACR_REGISTRY_NAME }}
+          repositoryName: ${{ secrets.ACR_REPOSITORY_NAME }}
+          tag: ${{ github.run_number }}
+          dockerFolderPath: ./Application/src/RazorPagesTestSample
       # - name: Create Issue on Failure
       #   if: failure()
       #   uses: actions/github-script@v5
