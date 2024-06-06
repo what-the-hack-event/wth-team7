@@ -41,7 +41,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    job:
+      name: Build
     steps:
       - uses: actions/checkout@v4
 
@@ -60,24 +61,41 @@ jobs:
         #   DOTNET_ROOT: /home/runner/.dotnet
 
       - name: Build with dotnet
-        run: dotnet build ./Application/src/RazorPagesTestSample/RazorPagesTestSample.cspro
+        run: dotnet build ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
 
       - name: dotnet test
         run: dotnet test ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release
+      job: Create Docker Image
+      # azure acr
+      # docker login
+      # docker build
+      
+      - uses: actions/checkout@v2
 
-      - name: Create Issue on Failure
-        if: failure()
-        uses: actions/github-script@v5
+      - name: AUTHENTICATE AZURE CONTAINER REGISTRY
+        uses: azure/docker-login@v1
         with:
-          script: |
-            const issue = {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: "Workflow failed",
-              body: `Workflow [${context.workflow}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) failed!`,
-              labels: ["bug", "workflow"]
-            }
-            github.rest.issues.create(issue)
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+      
+      - name: BUILD AND PUSH DOCKER IMAGE
+        run: |
+          docker build -t ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}} --build-arg build_version=${{vars.tag}} ${{vars.dockerFolderPath}}
+          docker push ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}}
+      # - name: Create Issue on Failure
+      #   if: failure()
+      #   uses: actions/github-script@v5
+      #   with:
+      #     script: |
+      #       const issue = {
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         title: "Workflow failed",
+      #         body: `Workflow [${context.workflow}](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}) failed!`,
+      #         labels: ["bug", "workflow"]
+      #       }
+      #       github.rest.issues.create(issue)
   # deploy:
   #   permissions:
   #     contents: none
