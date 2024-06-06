@@ -51,10 +51,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore ${{ github.workspace }}/Application/src/RazorPagesTestSample/RazorPagesTestSample.sln
+        shell: /usr/bin/bash -e {0}
+        # env:
+        #   AZURE_WEBAPP_NAME: your-app-name
+        #   AZURE_WEBAPP_PACKAGE_PATH: .
+        #   DOTNET_VERSION: 6.0.x
+        #   DOTNET_ROOT: /home/runner/.dotnet
 
       - name: Build with dotnet
-        run: dotnet build ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release
+        run: dotnet build ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj
 
       - name: dotnet test
         run: dotnet test ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release
