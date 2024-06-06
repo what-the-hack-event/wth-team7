@@ -24,4 +24,10 @@ jobs:
             text: optional, default is Ship it!!!!!
             # Color of your cow
             color: optional, default is white
+  
+  job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo environment variable
+        run: echo ${{ env.MY_ENV_VAR }} # Use the environment variable here
           
