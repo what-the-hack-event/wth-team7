@@ -1,5 +1,4 @@
 ﻿using System;
-// comment`using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
