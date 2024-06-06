@@ -23,6 +23,7 @@ env:
   AZURE_WEBAPP_NAME: your-app-name    # set this to the name of your Azure Web App
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
+  TAG: ${{ github.RUN_NUMBER }}
 
 on:
   push:
@@ -93,7 +94,7 @@ jobs:
         env:
           registryName: ${{ secrets.ACR_REGISTRY_NAME }}
           repositoryName: ${{ secrets.ACR_REPOSITORY_NAME }}
-          tag: ${{ vars.TAG }}
+          tag: $TAG
           dockerFolderPath: ./Application/src/RazorPagesTestSample
       # - name: Create Issue on Failure
       #   if: failure()
