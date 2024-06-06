@@ -28,6 +28,8 @@ jobs:
   job3:
     runs-on: ubuntu-latest
     steps:
-      - name: Echo environment variable
-        run: echo ${{ Team7.env.MY_ENV_VAR }} # Use the environment variable here
+          - name: Echo environment variable
+            env:
+              MY_SECRET_ENV_VAR: ${{ vars.MY_ENV_VAR }} # Use the secret here
+            run: echo ${{ env.MY_SECRET_ENV_VAR }} # Use the environment variable here
           
