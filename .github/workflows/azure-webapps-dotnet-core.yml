@@ -67,7 +67,7 @@ jobs:
 
     - name: dotnet test
       run: dotnet test ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release
-  job: 
+  job1: 
     name: Create Docker Image
     runs-on: ubuntu-latest
     steps:
