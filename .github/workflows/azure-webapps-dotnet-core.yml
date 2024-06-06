@@ -68,15 +68,15 @@ jobs:
     - name: dotnet test
       run: dotnet test ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release
     job: Create Docker Image
-    runs-on: ubuntu-latest
-    steps:
-      # azure acr
-      # docker login
-      # docker build
-      
-      - uses: actions/checkout@v2
+      runs-on: ubuntu-latest
+      steps:
+        # azure acr
+        # docker login
+        # docker build
+        
+        - uses: actions/checkout@v2
 
-      - name: AUTHENTICATE AZURE CONTAINER REGISTRY
+        - name: AUTHENTICATE AZURE CONTAINER REGISTRY
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.ACR_LOGIN_SERVER }}
