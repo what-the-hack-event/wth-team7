@@ -92,8 +92,8 @@ jobs:
           docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
           docker push $registryName/$repositoryName:$tag
         env:
-          registryName: ${{ secrets.ACR_REGISTRY_NAME }}
-          repositoryName: ${{ secrets.ACR_REPOSITORY_NAME }}
+          registryName: ${{ secrets.REGISTRYNAME }}
+          repositoryName: ${{ secrets.REPOSITORYNAME }}
           tag: ${{ env.TAG }}
           dockerFolderPath: ./Application/src/RazorPagesTestSample
       # - name: Create Issue on Failure
