@@ -93,7 +93,7 @@ jobs:
           docker push $registryName/$repositoryName:$tag
         env:
           registryName: ${{ secrets.REGISTRYNAME }}
-          repositoryName: ${{ secrets.REPOSITORYNAME }}
+          repositoryName: ${{ secrets.REPOSITRYNAME }}
           tag: ${{ env.TAG }}
           dockerFolderPath: ./Application/src/RazorPagesTestSample
       # - name: Create Issue on Failure
