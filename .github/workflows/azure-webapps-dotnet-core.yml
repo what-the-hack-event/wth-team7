@@ -70,7 +70,7 @@ jobs:
   job1: 
     name: Create Docker Image
     runs-on: ubuntu-latest
-    depends-on: job
+    needs: job
     steps:
       # azure acr
       # docker login
