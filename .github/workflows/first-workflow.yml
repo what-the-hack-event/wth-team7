@@ -34,10 +34,19 @@
 #             run: echo ${{ env.MY_SECRET_ENV_VAR }} # Use the environment variable here
           
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: 'My parameter description' 
+        required: true 
+        default: 'dev'
+        options:
+          - 'dev'
+          - 'test'
+          - 'prod'
 
-env:
-  environment: dev
+
 
 name: Azure Bicep
 jobs:
@@ -58,5 +67,5 @@ jobs:
         subscriptionId: ${{ vars.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ vars.AZURE_RG }}
         template: ./InfrastructureAsCode/main.bicep
-        parameters: 'environment=${{ env.environment }}'
+        parameters: 'environment=${{ github.event.inputs.environment }}' 
         failOnStdErr: false
