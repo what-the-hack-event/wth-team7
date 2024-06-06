@@ -70,6 +70,7 @@ jobs:
   job1: 
     name: Create Docker Image
     runs-on: ubuntu-latest
+    depends-on: job
     steps:
       # azure acr
       # docker login
@@ -85,13 +86,14 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
       
       - name: BUILD AND PUSH DOCKER IMAGE
+      
         run: |
           docker build -t $registryName/$repositoryName:$tag --build-arg build_version=$tag $dockerFolderPath
           docker push $registryName/$repositoryName:$tag
         env:
           registryName: ${{ secrets.ACR_REGISTRY_NAME }}
           repositoryName: ${{ secrets.ACR_REPOSITORY_NAME }}
-          tag: ${{ github.run_number }}
+          tag: ${{ vars.tag }}
           dockerFolderPath: ./Application/src/RazorPagesTestSample
       # - name: Create Issue on Failure
       #   if: failure()
