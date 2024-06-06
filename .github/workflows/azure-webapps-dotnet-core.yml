@@ -67,26 +67,26 @@ jobs:
 
     - name: dotnet test
       run: dotnet test ./Application/src/RazorPagesTestSample/RazorPagesTestSample.csproj --configuration Release
-    job: Create Docker Image
-      runs-on: ubuntu-latest
-      steps:
-        # azure acr
-        # docker login
-        # docker build
-        
-        - uses: actions/checkout@v2
+  job: Create Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      # azure acr
+      # docker login
+      # docker build
+      
+      - uses: actions/checkout@v2
 
-        - name: AUTHENTICATE AZURE CONTAINER REGISTRY
-          uses: azure/docker-login@v1
-          with:
-            login-server: ${{ secrets.ACR_LOGIN_SERVER }}
-            username: ${{ secrets.ACR_USERNAME }}
-            password: ${{ secrets.ACR_PASSWORD }}
-        
-        - name: BUILD AND PUSH DOCKER IMAGE
-          run: |
-            docker build -t ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}} --build-arg build_version=${{vars.tag}} ${{vars.dockerFolderPath}}
-            docker push ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}}
+      - name: AUTHENTICATE AZURE CONTAINER REGISTRY
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+      
+      - name: BUILD AND PUSH DOCKER IMAGE
+        run: |
+          docker build -t ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}} --build-arg build_version=${{vars.tag}} ${{vars.dockerFolderPath}}
+          docker push ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}}
       # - name: Create Issue on Failure
       #   if: failure()
       #   uses: actions/github-script@v5
