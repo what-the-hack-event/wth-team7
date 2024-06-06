@@ -38,7 +38,7 @@ on:
     inputs:
       environment:
         type: choice
-        description: 'My parameter description' 
+        description: 'Select the environment to deploy to' 
         required: true 
         default: 'dev'
         options:
