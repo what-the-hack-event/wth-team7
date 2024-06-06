@@ -94,7 +94,7 @@ jobs:
         env:
           registryName: ${{ secrets.ACR_REGISTRY_NAME }}
           repositoryName: ${{ secrets.ACR_REPOSITORY_NAME }}
-          tag: $TAG
+          tag: ${{ env.TAG }}
           dockerFolderPath: ./Application/src/RazorPagesTestSample
       # - name: Create Issue on Failure
       #   if: failure()
