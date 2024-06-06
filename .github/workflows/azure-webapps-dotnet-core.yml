@@ -86,8 +86,8 @@ jobs:
       
       - name: BUILD AND PUSH DOCKER IMAGE
         run: |
-          docker build -t ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}} --build-arg build_version=${{vars.tag}} ${{vars.dockerFolderPath}}
-          docker push ${{vars.registryName}}/${{vars.repositoryName}}:${{vars.tag}}
+          docker build -t ${{ vars.registryName }}/${{ vars.repositoryName }}:${{ vars.tag }} --build-arg build_version=${{ vars.tag }} ${{ vars.dockerFolderPath }}
+          docker push ${{ vars.registryName }}/${{ vars.repositoryName }}:${{ vars.tag }}
       # - name: Create Issue on Failure
       #   if: failure()
       #   uses: actions/github-script@v5
